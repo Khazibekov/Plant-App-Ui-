@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plant_app/constants.dart';
+import 'package:plant_app/ui/login_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -17,12 +18,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.white,
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 20, top: 20),
             child: InkWell(
-              onTap: () => null,
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
+              },
               child: Text(
                 "Skip",
                 style: TextStyle(
@@ -75,7 +78,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             bottom: 60,
             right: 30,
             child: Container(
-              child: IconButton(onPressed: null, icon: Icon(Icons.arrow_back_ios)),
+              child: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (currentIndex < 2) {
+                        currentIndex++;
+                        if (currentIndex < 3) {
+                          _pageController.nextPage(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.easeIn);
+                        } else {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (_) => LoginPage()));
+                        }
+                      }
+                    });
+                  },
+                  icon: Icon(
+                    Icons.keyboard_arrow_right_sharp,
+                    size: 24,
+                    color: Colors.white,
+                  )),
+              padding: EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Constants.primaryColor,
+              ),
             ),
           )
         ],
