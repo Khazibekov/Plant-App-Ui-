@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plant_app/ui/onboarding_screen.dart';
+import 'package:plant_app/ui/root_page.dart';
 
 void main() {
   runApp(MyApp());
